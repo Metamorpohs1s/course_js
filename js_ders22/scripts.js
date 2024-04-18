@@ -37,10 +37,10 @@ function displayTodos() {
             <span>${item.todoTitle}</span>
             <button class="text-red-400">Sil</button>
         </li>
-        ${item.id}
+        ${item.id};
         `;
     });
     todosDOM.innerHTML = result;
-    console.log(todos);
+    displayTodos();
 
 };
