@@ -4,13 +4,13 @@ const todosDOM = document.querySelector("#todos");
 const btnClearDOM = document.querySelector("#clear");
 
 
-class Storage{
-    static addTodoStorage(todoArr){
-        let storage =  localStorage.setItem( "todo", JSON.stringify(todoArr));
-        return storage; 
+class Storage {
+    static addTodoStorage(todoArr) {
+        let storage = localStorage.setItem("todo", JSON.stringify(todoArr));
+        return storage;
     };
 
-    static getStorage (){
+    static getStorage() {
         let storage = localStorage.getItem("todo") === null ? [] : JSON.parse(localStorage.getItem("todo"));
         return storage;
     };
@@ -18,13 +18,19 @@ class Storage{
 
 let todoArr = Storage.getStorage();
 
+// const {...rest} = todoArr[0];
+// console.log(rest);
 
-btnAddTodoDOM.addEventListener("click", function(e){
+btnAddTodoDOM.addEventListener("click", (e) => {
     e.preventDefault();
-    let id = todoArr.length + 1 ;
+    let id = todoArr.length + 1;
     let title = textInputDOM.value;
     const todo = new Todo(id, title);
-    todoArr.push(todo);
+    todoArr = [...todoArr, todo];
+    
+    // console.log(todoArr);
+    // todoArr.push(todo);
+  
     todoArr.reverse(todo);
     UI.alert("Todo Eklendi !")
     UI.clearInput();
@@ -33,23 +39,23 @@ btnAddTodoDOM.addEventListener("click", function(e){
     Storage.addTodoStorage(todoArr);
 });
 
-class Todo{
-    constructor(id, title){
+class Todo {
+    constructor(id, title) {
         this.id = id;
         this.title = title;
     };
 };
 
-class UI{
-   
-   static displayTodos(){
+class UI {
 
-    let result = "";
-    if (todoArr.length === 0) {
-        todosDOM.innerHTML = "liste boş !"
-    } else {
-        todoArr.forEach((item) => {
-            result += ` 
+    static displayTodos() {
+
+        let result = "";
+        if (todoArr.length === 0) {
+            todosDOM.innerHTML = "liste boş !"
+        } else {
+            todoArr.map((item) => {
+                result += ` 
             <li class="flex justify-between border px-4 py-3
            flex items-center justify-between font-bold">
                 <span>${item.title}</span>
@@ -57,37 +63,37 @@ class UI{
             </li>
 
             `;
-        });
-        todosDOM.innerHTML = result;
+            });
+            todosDOM.innerHTML = result;
+
+        };
 
     };
 
-   };
 
-
-   static clearInput(){
+    static clearInput() {
         textInputDOM.value = "";
     };
 
-    static removeTodo(){
-        todosDOM.addEventListener("click", function(e){
-           if(e.target.classList.contains("remove")){
-            e.target.parentElement.remove();
-            let btnId = e.target.dataset.id;
-            UI.removeArrayTodo(btnId);
-           }
+    static removeTodo() {
+        todosDOM.addEventListener("click",  (e) => {
+            if (e.target.classList.contains("remove")) {
+                e.target.parentElement.remove();
+                let btnId = e.target.dataset.id;
+                UI.removeArrayTodo(btnId);
+            }
         });
     };
 
-    static removeArrayTodo(id){
-        todoArr= todoArr.filter((item)=> item.id !== +id);
+    static removeArrayTodo(id) {
+        todoArr = todoArr.filter((item) => item.id !== +id);
         Storage.addTodoStorage(todoArr);
         UI.alert("todo silindi");
         UI.displayTodos();
     };
 
-    static clearTodos(){
-        btnClearDOM.addEventListener("click", function(){
+    static clearTodos() {
+        btnClearDOM.addEventListener("click",  () => {
             todoArr = [];
             Storage.addTodoStorage(todoArr);
             UI.displayTodos();
@@ -95,14 +101,14 @@ class UI{
         });
     };
 
-    static alert(text){
+    static alert(text) {
         window.alert(text);
     };
 };
 
 
 
-window.addEventListener("DOMContentLoaded", function(){
+window.addEventListener("DOMContentLoaded",  () => {
     UI.removeTodo();
     UI.displayTodos();
     UI.clearTodos();
