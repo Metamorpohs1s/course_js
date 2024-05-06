@@ -4,8 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Js APP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-        <script src="scripts.js"></script>
+<body class="bg-black">
+    
+<h1 class="text-5xl my-10 mx-10 text-center text-white">Todo List</h1>
+<div class="container mx-auto w-1/2">
+    <form action="">
+        <div class="border flex">
+            <input id="todo_input" type="text" placeholder="Birşeyler yaz ..." class="w-full p-2">
+            <button id="add_todo" type="submit" class="w-25 p-3 relative z-90 border-1 px-6 bg-green-500
+            text-white">Ekle</button>
+        </div>
+    </form>
+    <div class="flex justify-end my-5">
+        <button id ="clear" class="p-3 text-white bg-red-500"">Temizle</button>
+    </div>
+    <ul class="border p-6 flex flex-col gap-y-4 bg-white" id="todos">
+        <li class="flex justify-between border px-4 py-3
+       flex items-center justify-between">
+            <span>Todo Name</span>
+            <button class="text-red-400">Sil</button>
+        </li>
+    </ul>
+</div>
+    <script src="scripts.js"></script>
 </body>
 </html>
