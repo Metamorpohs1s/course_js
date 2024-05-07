@@ -24,10 +24,52 @@ sayHello("Asim", goodBye);
  */
 
 // ! -- aJAX VE HTTP İSTEKLERİ
+/* let lili;
 const xhr = new XMLHttpRequest();
 xhr.open("GET", "https://jsonplaceholder.typicode.com/users" );
-xhr.onload = function(){
-    console.log(xhr.responseText);
 
+xhr.onload = function(){
+    const response = xhr.responseText;
+    // console.log(JSON.parse(response)[0]);
+    if(xhr.status ===201){
+
+        // lili = JSON.parse(response);
+        console.log(JSON.parse(response));
+    }else{
+        console.log("Are you sure nigga? = " + xhr.status);
+    }
 };
 xhr.send();
+
+console.log(lili);
+ */
+// ! promise
+
+/* 
+ function getRandomNumber(){
+    return new Promise ((resolve, reject)=>{
+        setTimeout(() => {
+        let number = Math.floor(Math.random()*100)
+        if(number % 2 === 0 ){
+           resolve(number);
+        }else{
+            reject(`rejected: ${number} hata tek sayi `);
+        }
+    }, 1500); 
+    });
+ };
+ getRandomNumber().then((number) => console.log("resolve " + number ))
+ .catch((error) => console.log(error)); */
+
+//! fetch
+/* 
+ fetch("https://jsonplaceholder.typicode.com/users")
+ .then((response) => response.json())
+ .then((data)=> console.log(data)).catch((error) => console.log(error)); */
+const response = fetch("https://jsonplaceholder.typicode.com/users");
+console.log(
+    response
+    .then((response)=>response.json())
+    .then((data) => data)
+    .catch((error) => console.log(error))
+);
