@@ -9,15 +9,25 @@ console.log("islem 1234");
  */
 //! -- CallBack Fonksiyonu
 
-function sayHello(name, callback){
-    callback();
+/* function sayHello(name, callback){
     
+    callback();
     console.log(`hello ${name}`);
+   
     
    
-}
+};
 function goodBye(){
-    console.log("gorusmek uzere");
-}
-sayHello("Asım", goodBye);
+    console.log("gorusmek uzere"); 
+};
+sayHello("Asim", goodBye);
+ */
 
+// ! -- aJAX VE HTTP İSTEKLERİ
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "https://jsonplaceholder.typicode.com/users" );
+xhr.onload = function(){
+    console.log(xhr.responseText);
+
+};
+xhr.send();
