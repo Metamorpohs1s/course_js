@@ -70,6 +70,6 @@ const response = fetch("https://jsonplaceholder.typicode.com/users");
 console.log(
     response
     .then((response)=>response.json())
-    .then((data) => data)
+    .then((data) => console.log(data))
     .catch((error) => console.log(error))
 );
